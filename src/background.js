@@ -1,60 +1,56 @@
 // Create context menus
-browser.contextMenus.create({
+chrome.contextMenus.create({
   id: "context-go-to-the-login-page",
   title: "Go to the login page"
 });
 
-function onUpdated(tab) {
-  // console.log(`[LoginPageShortcutAddon] Updated tab: ${tab.id}`);
-}
-  
 function onError(error) {
   console.log(`[LoginPageShortcutAddon] Error: ${error}`);
 }
 
-function updateTab(inputUrl) {
-  let updating = browser.tabs.update(browser.tabs.getCurrent().id, {
+function updateTab(tabId, inputUrl) {
+  chrome.tabs.update(tabId, {
     active: true,
     url: inputUrl
   });
-  updating.then(onUpdated, onError);
 }
 
 function redirectTo(loginUrl) {
-  if(loginUrl === "")
+  if(loginUrl === ""){
+    console.log("LoginPageShortcutAddon Login page not found.");
     return;
+  }
   
-  browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
     let tab = tabs[0];
     if(tab.url === loginUrl){
       console.log("[LoginPageShortcutAddon] It seems current page is login page : " + loginUrl);
+      return;
     }
-    else{
-      console.log("[LoginPageShortcutAddon] Go to the login page : " + loginUrl);
-      let querying = browser.tabs.query({currentWindow:true});
-      querying.then(updateTab(loginUrl), onError);
-    }
-  }, console.error);
+    console.log("[LoginPageShortcutAddon] Go to the login page : " + loginUrl);
+    updateTab(tab.id, loginUrl);
+  });
+  
 }
 
 function requestFindLoginPage() {
-  browser.tabs.query({currentWindow: true, active: true}).then((tabs) => {
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
     let tab = tabs[0];
     chrome.tabs.sendMessage(tab.id, {
       from: "requestFindLoginPage"
     });
-  }, console.error);
+  });
 }
 
 // Add keyboard command listener
-browser.commands.onCommand.addListener((command) => {
+chrome.commands.onCommand.addListener((command) => {
   if (command == "go-to-the-login-page") {
       requestFindLoginPage();
   }
  });
 
  // Add context menu listener
- browser.contextMenus.onClicked.addListener(function(info, tab) {
+ chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId == "context-go-to-the-login-page") {
       requestFindLoginPage();
   }

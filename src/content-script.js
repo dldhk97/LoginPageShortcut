@@ -10,10 +10,8 @@ function findLoginpage() {
       break;
     }
   }
-  if(loginUrl !== ""){
-    sendLoginPageUrl(loginUrl);
-  }
-    
+
+  sendLoginPageUrl(loginUrl); 
 }
 
 function sendLoginPageUrl(loginUrl) {
@@ -23,7 +21,7 @@ function sendLoginPageUrl(loginUrl) {
   });
 }
 
-chrome.runtime.onMessage.addListener(function(msg) {
+chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if (msg.from == "requestFindLoginPage") {
     findLoginpage();
   }
