@@ -24,4 +24,12 @@ Simply search the href tags and redirects if "login" string exists in url.
 It may not work on all sites.
 
 ## Install
-Firefox : https://addons.mozilla.org/ko/firefox/addon/login-page-shortcut-addon/
+
+### Firefox
+https://addons.mozilla.org/ko/firefox/addon/login-page-shortcut-addon/
+
+### Chrome
+1. Download [latest release.](https://github.com/dldhk97/LoginPageShortcutAddon/releases)
+2. Extract zip file.
+3. Open the chrome. Go to the "chrome://extensions/".
+4. Toggle "Developer mode", Load extracted extension.
