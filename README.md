@@ -10,7 +10,7 @@ Also, you can use context menu using right click.
 You can change the shortcut key on the Firefox addon page(about:addons).
 
 ## How to work
-Simply find all the href tags and move if "login" string exists in url.
+Simply search the href tags and redirects if "login" string exists in url.
 
 ## Compatibility
 It may not work on all sites.
