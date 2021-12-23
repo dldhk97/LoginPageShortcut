@@ -14,3 +14,6 @@ Simply search the href tags and redirects if "login" string exists in url.
 
 ## Compatibility
 It may not work on all sites.
+
+## Install
+Firefox : https://addons.mozilla.org/ko/firefox/addon/login-page-shortcut-addon/
