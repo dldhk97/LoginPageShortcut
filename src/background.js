@@ -17,7 +17,7 @@ function updateTab(tabId, inputUrl) {
 
 function redirectTo(loginUrl) {
   if(loginUrl === ""){
-    console.log("LoginPageShortcutAddon Login page not found.");
+    console.log("[LoginPageShortcutAddon] Login page not found.");
     return;
   }
   

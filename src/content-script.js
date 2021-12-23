@@ -15,6 +15,11 @@ function findLoginpage() {
 }
 
 function sendLoginPageUrl(loginUrl) {
+  if(loginUrl === ""){
+    console.log("[LoginPageShortcutAddon] Login page not found.");
+    return;
+  }
+
   chrome.runtime.sendMessage({
     from:"returnFindLoginPage",
     url: loginUrl
